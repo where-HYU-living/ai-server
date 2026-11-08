@@ -30,15 +30,24 @@ sh scripts/fetch_models.sh            # CubiCasa5K 코드(GitHub) + 가중치(20
 .venv/bin/uvicorn app.main:app --port 8000
 .venv/bin/python -m pytest -q tests
 .venv/bin/python scripts/evaluate.py  # 27장 vs 정답 JSON (숫자 비교)
-.venv/bin/python scripts/build_dong_features.py deals.csv   # 동 단위 외부 피처 (KAKAO_REST_KEY 필요)
-.venv/bin/python scripts/train_rent.py deals.csv            # 적정 월세 모델 학습 + 동 중앙값 방식과 비교
 ```
+
+## 적정 월세 모델 학습
+```bash
+# 실거래 CSV (백엔드 로컬 DB, 비어 있으면 백엔드에서 INGEST_ENABLED=true 로 한 번 수집)
+docker exec chatatda-db psql -U chatatda -d chatatda -c "copy (select dong, area_m2, deposit, rent, contract_ym, floor, built_year, building_type, contract_type from real_deals) to stdout csv header" > data/raw/deals.csv
+KAKAO_REST_KEY=... .venv/bin/python scripts/build_dong_features.py data/raw/deals.csv   # data/dong_features.json
+.venv/bin/python scripts/train_rent.py data/raw/deals.csv      # weights/rent/ (모델·검증 결과)
+hf upload combe4259/chatatda-models weights/rent rent          # 서버는 FETCH_MODELS=true 일 때 받아 감
+```
+현재 모델 (2025-11~2026-10 실거래 19,968건): 마지막 3개월 검증에서 절대오차율 중앙값 11.7% (단순 동 중앙값 20.1%),
+평균 절대오차 11.6만 (중앙값 19.3만). 자세한 값은 [모델 카드](https://huggingface.co/combe4259/chatatda-models).
+scikit-learn 버전은 학습한 버전(1.7.2)으로 고정한다 (`requirements.txt`).
 ## 배포 (Railway)
 `Dockerfile` + `railway.json`.
 모델 파일은 [Hugging Face `combe4259/chatatda-models`](https://huggingface.co/combe4259/chatatda-models)에 두고,
 Railway 변수 `FETCH_MODELS=true` 일 때만 빌드 중에 받는다 (기본 `false` — 받지 않음).
 추론을 쓰려면 `FETCH_MODELS=true` 와 `INFERENCE=on` 을 함께 켠다.
-적정 월세 모델을 새로 학습했으면 `hf upload combe4259/chatatda-models weights/rent/model.joblib rent/model.joblib`.
 백엔드에는 환경변수 `AI_SERVER_URL=https://<서비스 주소>` 를 둔다.
 
 ## 라이선스 주의

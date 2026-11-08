@@ -3,7 +3,7 @@
 실거래에 좌표가 없어서 동 중심 기준으로 붙인다.
   campus_m  동 중심 ~ 한양대 사자상 직선거리 (campus-data 원점)
   subway_m  동 중심 ~ 가장 가까운 지하철역 (카카오 로컬 SW8)
-  bus_500m  동 중심 500m 안 버스 정류장 수 (백엔드 geo/bus-stops.json)
+  bus_500m  동 중심 500m 안 버스 정류장 수 (백엔드 geo/bus-stops.json — 자료 범위 밖 동은 null)
 
 실행 (ai-server/ 에서): KAKAO_REST_KEY=... .venv/bin/python scripts/build_dong_features.py deals.csv
 """
@@ -39,9 +39,11 @@ def kakao(path: str, key: str, **params) -> dict:
 
 
 def dong_center(dong: str, key: str) -> tuple[float, float] | None:
-    for doc in kakao("/v2/local/search/address.json", key, query=f"서울 {dong}").get("documents", []):
-        if doc.get("address_type") == "REGION":
-            return float(doc["y"]), float(doc["x"])
+    """실거래 수집 구역(성동구·동대문구) 안의 법정동 중심."""
+    for gu in ("성동구", "동대문구"):
+        for doc in kakao("/v2/local/search/address.json", key, query=f"서울 {gu} {dong}").get("documents", []):
+            if doc.get("address_type") == "REGION" and doc["address"].get("region_2depth_name") == gu:
+                return float(doc["y"]), float(doc["x"])
     return None
 
 
@@ -49,6 +51,12 @@ def nearest_subway(center: tuple[float, float], key: str) -> float | None:
     docs = kakao("/v2/local/search/category.json", key, category_group_code="SW8",
                  y=center[0], x=center[1], radius=3000, sort="distance").get("documents", [])
     return float(docs[0]["distance"]) if docs else None
+
+
+def covered(c: tuple[float, float], box: dict, margin_m: float = 500) -> bool:
+    """반경 500m 원이 정류장 자료 범위 안에 다 들어오는지."""
+    dlat, dlng = margin_m / 111_000, margin_m / (111_000 * math.cos(math.radians(c[0])))
+    return (box["minLat"] + dlat <= c[0] <= box["maxLat"] - dlat) and (box["minLng"] + dlng <= c[1] <= box["maxLng"] - dlng)
 
 
 def main() -> None:
@@ -59,7 +67,9 @@ def main() -> None:
 
     with a.csv.open(encoding="utf-8") as f:
         dongs = sorted({r["dong"] for r in csv.DictReader(f)})
-    stops = [(s["lat"], s["lng"]) for s in json.loads(BUS_STOPS.read_text(encoding="utf-8"))["stops"]]
+    bus = json.loads(BUS_STOPS.read_text(encoding="utf-8"))
+    stops = [(s["lat"], s["lng"]) for s in bus["stops"]]
+    box = bus["bbox"]  # 정류장 자료가 덮는 범위. 밖에 있는 동은 '0곳'이 아니라 '모름'(None)
 
     out = {}
     for dong in dongs:
@@ -70,7 +80,7 @@ def main() -> None:
         out[dong] = {"lat": c[0], "lng": c[1],
                      "campus_m": round(distance_m(c, CAMPUS)),
                      "subway_m": nearest_subway(c, key),
-                     "bus_500m": sum(distance_m(c, s) <= 500 for s in stops)}
+                     "bus_500m": sum(distance_m(c, s) <= 500 for s in stops) if covered(c, box) else None}
         print(dong, out[dong])
 
     OUT.parent.mkdir(parents=True, exist_ok=True)

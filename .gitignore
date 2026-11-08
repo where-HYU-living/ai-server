@@ -5,3 +5,4 @@ third_party/
 *.pyc
 .pytest_cache/
 .hypothesis/
+data/raw/

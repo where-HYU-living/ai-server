@@ -38,8 +38,12 @@ def _encode(rows: list[dict], vocab: dict[str, list[str]]) -> np.ndarray:
     return out
 
 
-def fit(deals: list[Deal], dong_features: dict[str, dict], seed: int = 0) -> dict:
+DEFAULT_PARAMS = {"max_iter": 300, "learning_rate": 0.05, "min_samples_leaf": 20, "max_leaf_nodes": 31}
+
+
+def fit(deals: list[Deal], dong_features: dict[str, dict], seed: int = 0, params: dict | None = None) -> dict:
     """학습해서 저장 가능한 묶음(dict)을 돌려준다."""
+    p = {**DEFAULT_PARAMS, **(params or {})}
     from sklearn.ensemble import HistGradientBoostingRegressor
 
     rows = [row(d, dong_features) for d in deals]
@@ -50,10 +54,9 @@ def fit(deals: list[Deal], dong_features: dict[str, dict], seed: int = 0) -> dic
     models = {}
     for q in QUANTILES:
         m = HistGradientBoostingRegressor(loss="quantile", quantile=q, categorical_features=cat_mask,
-                                          max_iter=300, learning_rate=0.05, min_samples_leaf=20,
-                                          random_state=seed)
+                                          random_state=seed, **p)
         models[q] = m.fit(x, y)
-    return {"models": models, "vocab": vocab, "dong_features": dong_features, "n": len(deals)}
+    return {"models": models, "vocab": vocab, "dong_features": dong_features, "n": len(deals), "params": p}
 
 
 class RentModel:
