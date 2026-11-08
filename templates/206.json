@@ -1,0 +1,56 @@
+{
+ "id": 206,
+ "name": "제7학생생활관 2인실",
+ "areaM2": 23.7,
+ "ceilingHeight": 2.4,
+ "walls": [
+  { "from": [0, 0], "to": [3.7, 0], "thickness": 0.2 },
+  { "from": [3.7, 0], "to": [3.7, 6.2], "thickness": 0.2 },
+  { "from": [3.7, 6.2], "to": [0, 6.2], "thickness": 0.2 },
+  { "from": [0, 6.2], "to": [0, 0], "thickness": 0.2 },
+  { "from": [1.5, 0.0], "to": [1.5, 2.1], "thickness": 0.1 },
+  { "from": [0.0, 2.1], "to": [1.5, 2.1], "thickness": 0.1 }
+ ],
+ "openings": [
+  { "type": "door", "wall": 0, "offset": 1.95, "width": 0.9, "height": 2.1, "sill": 0, "style": "swing", "swing": { "hinge": "end", "opensTo": -1 } },
+  { "type": "door", "wall": 4, "offset": 1.28, "width": 0.75, "height": 2.0, "sill": 0, "style": "swing", "swing": { "hinge": "start", "opensTo": 1 } },
+  { "type": "window", "wall": 2, "offset": 1.15, "width": 1.4, "height": 1.3, "sill": 0.9, "style": "sliding" }
+ ],
+ "rooms": [
+  {
+   "name": "욕실",
+   "kind": "bathroom",
+   "polygon": [[0.0, 0.0], [1.5, 0.0], [1.5, 2.1], [0.0, 2.1]],
+   "floor": { "material": "tile", "color": "#cfd2d0", "height": -0.05 }
+  },
+  {
+   "name": "현관",
+   "kind": "entrance",
+   "polygon": [[1.5, 0.0], [3.7, 0.0], [3.7, 1.4], [1.5, 1.4]],
+   "floor": { "material": "tile", "color": "#a9aaa6", "height": -0.05 }
+  },
+  {
+   "name": "침실",
+   "kind": "bedroom",
+   "polygon": [[0.0, 2.1], [1.5, 2.1], [1.5, 1.4], [3.7, 1.4], [3.7, 6.2], [0.0, 6.2]],
+   "floor": { "material": "wood", "color": "#d9cdb8", "height": 0 }
+  }
+ ],
+ "entrance": [2.4, 0.0],
+ "fixtures": [
+  { "kind": "toilet", "position": [1.1, 0.45], "facing": "S", "room": "욕실" },
+  { "kind": "shower", "position": [0.5, 0.5], "facing": "S", "size": [0.8, 0.8, 2.1], "room": "욕실" },
+  { "kind": "sink", "position": [0.32, 1.4], "facing": "E", "room": "욕실" },
+  { "kind": "shoeRack", "position": [3.4, 0.55], "facing": "W", "size": [0.6, 0.4, 2.0], "room": "현관" },
+  { "kind": "builtinWardrobe", "position": [3.28, 1.75], "facing": "W", "size": [1.8, 0.65, 2.2], "room": "침실" },
+  { "kind": "bed", "position": [0.58, 3.68], "facing": "N", "size": [0.95, 1.95, 0.45], "room": "침실" },
+  { "kind": "desk", "position": [0.4, 5.5], "facing": "W", "size": [1.2, 0.6, 0.75], "room": "침실" },
+  { "kind": "shelf", "position": [0.25, 5.5], "facing": "E", "size": [1.2, 0.3, 1.05], "elevation": 0.75, "room": "침실" },
+  { "kind": "chair", "position": [1.05, 5.5], "facing": "W", "room": "침실" },
+  { "kind": "bed", "position": [3.13, 3.73], "facing": "N", "size": [0.95, 1.95, 0.45], "room": "침실" },
+  { "kind": "desk", "position": [3.3, 5.5], "facing": "E", "size": [1.2, 0.6, 0.75], "room": "침실" },
+  { "kind": "shelf", "position": [3.45, 5.5], "facing": "W", "size": [1.2, 0.3, 1.05], "elevation": 0.75, "room": "침실" },
+  { "kind": "chair", "position": [2.65, 5.5], "facing": "E", "room": "침실" }
+ ],
+ "glbUrl": null
+}

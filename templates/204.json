@@ -1,0 +1,49 @@
+{
+ "id": 204,
+ "name": "개나리관 2인실",
+ "areaM2": 20.0,
+ "ceilingHeight": 2.4,
+ "walls": [
+  { "from": [0, 0], "to": [3.5, 0], "thickness": 0.2 },
+  { "from": [3.5, 0], "to": [3.5, 5.8], "thickness": 0.2 },
+  { "from": [3.5, 5.8], "to": [0, 5.8], "thickness": 0.2 },
+  { "from": [0, 5.8], "to": [0, 0], "thickness": 0.2 },
+  { "from": [2.1, 0.0], "to": [2.1, 1.9], "thickness": 0.1 },
+  { "from": [2.1, 1.9], "to": [3.5, 1.9], "thickness": 0.1 }
+ ],
+ "openings": [
+  { "type": "door", "wall": 0, "offset": 0.8, "width": 0.9, "height": 2.1, "sill": 0, "style": "swing", "swing": { "hinge": "start", "opensTo": -1 } },
+  { "type": "door", "wall": 4, "offset": 0.98, "width": 0.75, "height": 2.0, "sill": 0, "style": "swing", "swing": { "hinge": "start", "opensTo": -1 } },
+  { "type": "window", "wall": 2, "offset": 0.95, "width": 1.6, "height": 1.4, "sill": 0.9, "style": "sliding" }
+ ],
+ "rooms": [
+  {
+   "name": "욕실",
+   "kind": "bathroom",
+   "polygon": [[2.1, 0.0], [3.5, 0.0], [3.5, 1.9], [2.1, 1.9]],
+   "floor": { "material": "tile", "color": "#c9cdca", "height": -0.05 }
+  },
+  {
+   "name": "2인실",
+   "kind": "bedroom",
+   "polygon": [[0.0, 0.0], [2.1, 0.0], [2.1, 1.9], [3.5, 1.9], [3.5, 5.8], [0.0, 5.8]],
+   "floor": { "material": "vinyl", "color": "#e6e6e0", "height": 0 }
+  }
+ ],
+ "entrance": [1.25, 0.0],
+ "fixtures": [
+  { "kind": "shower", "position": [2.55, 0.45], "facing": "S", "size": [0.6, 0.7, 2.1], "room": "욕실" },
+  { "kind": "toilet", "position": [3.1, 0.45], "facing": "S", "room": "욕실" },
+  { "kind": "sink", "position": [3.18, 1.35], "facing": "W", "room": "욕실" },
+  { "kind": "wardrobe", "position": [0.4, 1.8], "facing": "E", "size": [1.0, 0.6, 2.1], "room": "2인실" },
+  { "kind": "bed", "position": [0.58, 3.38], "facing": "N", "size": [0.95, 1.95, 0.45], "room": "2인실" },
+  { "kind": "desk", "position": [0.4, 5.05], "facing": "W", "size": [1.0, 0.6, 0.75], "room": "2인실" },
+  { "kind": "shelf", "position": [0.25, 5.05], "facing": "E", "size": [1.0, 0.3, 1.05], "elevation": 0.75, "room": "2인실" },
+  { "kind": "chair", "position": [1.05, 5.05], "facing": "W", "room": "2인실" },
+  { "kind": "bed", "position": [2.93, 3.03], "facing": "N", "size": [0.95, 1.95, 0.45], "room": "2인실" },
+  { "kind": "desk", "position": [3.1, 4.65], "facing": "E", "size": [1.2, 0.6, 0.75], "room": "2인실" },
+  { "kind": "shelf", "position": [3.25, 4.65], "facing": "W", "size": [1.2, 0.3, 1.05], "elevation": 0.75, "room": "2인실" },
+  { "kind": "chair", "position": [2.45, 4.65], "facing": "E", "room": "2인실" }
+ ],
+ "glbUrl": null
+}

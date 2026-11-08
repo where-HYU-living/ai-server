@@ -1,0 +1,67 @@
+{
+ "id": 19,
+ "name": "힐데스하임(U-삼진랜드) 14타입",
+ "areaM2": 14.56,
+ "ceilingHeight": 2.4,
+ "walls": [
+  { "from": [0, 0], "to": [3.3, 0], "thickness": 0.2 },
+  { "from": [3.3, 0], "to": [3.3, 6.455], "thickness": 0.2 },
+  { "from": [3.3, 6.455], "to": [0, 6.455], "thickness": 0.2 },
+  { "from": [0, 6.455], "to": [0, 0], "thickness": 0.2 },
+  { "from": [1.43, 0], "to": [1.43, 2.67], "thickness": 0.1 },
+  { "from": [0, 2.67], "to": [1.43, 2.67], "thickness": 0.1 },
+  { "from": [0.52, 0], "to": [0.52, 1.15], "thickness": 0.1 },
+  { "from": [0, 1.15], "to": [0.52, 1.15], "thickness": 0.1 },
+  { "from": [2.59, 5.01], "to": [3.3, 5.01], "thickness": 0.1 },
+  { "from": [2.59, 5.01], "to": [2.59, 6.455], "thickness": 0.1 }
+ ],
+ "openings": [
+  { "type": "door", "wall": 0, "offset": 1.49, "width": 0.9, "height": 2.1, "sill": 0, "style": "swing", "swing": { "hinge": "end", "opensTo": 1 } },
+  { "type": "door", "wall": 4, "offset": 1.79, "width": 0.7, "height": 2.0, "sill": 0, "style": "swing", "swing": { "hinge": "end", "opensTo": -1 } },
+  { "type": "door", "wall": 9, "offset": 0.51, "width": 0.6, "height": 2.0, "sill": 0, "style": "swing", "swing": { "hinge": "end", "opensTo": -1 } },
+  { "type": "window", "wall": 2, "offset": 0.95, "width": 2.1, "height": 2.0, "sill": 0.1, "style": "sliding" }
+ ],
+ "rooms": [
+  {
+   "name": "현관",
+   "kind": "entrance",
+   "polygon": [[1.43, 0], [3.3, 0], [3.3, 0.88], [1.43, 0.88]],
+   "floor": { "material": "tile", "color": "#D8D6CF", "height": -0.08 }
+  },
+  {
+   "name": "PS",
+   "kind": "other",
+   "polygon": [[0, 0], [0.52, 0], [0.52, 1.15], [0, 1.15]],
+   "floor": { "material": "concrete", "color": "#8A8A8A", "height": 0 }
+  },
+  {
+   "name": "욕실",
+   "kind": "bathroom",
+   "polygon": [[0.52, 0], [1.43, 0], [1.43, 2.67], [0, 2.67], [0, 1.15], [0.52, 1.15]],
+   "floor": { "material": "tile", "color": "#D9CFC0", "height": -0.08 }
+  },
+  {
+   "name": "거실",
+   "kind": "living",
+   "polygon": [[1.43, 0.88], [3.3, 0.88], [3.3, 5.01], [2.59, 5.01], [2.59, 6.455], [0, 6.455], [0, 2.67], [1.43, 2.67]],
+   "floor": { "material": "wood", "color": "#E3CDB0", "height": 0 }
+  },
+  {
+   "name": "실외기실",
+   "kind": "utility",
+   "polygon": [[2.59, 5.01], [3.3, 5.01], [3.3, 6.455], [2.59, 6.455]],
+   "floor": { "material": "concrete", "color": "#D4D4D6", "height": -0.05 }
+  }
+ ],
+ "entrance": [1.94, 0],
+ "fixtures": [
+  { "kind": "shower", "position": [0.97, 0.71], "facing": "S", "room": "욕실" },
+  { "kind": "toilet", "position": [0.54, 1.52], "facing": "E", "room": "욕실" },
+  { "kind": "sink", "position": [0.42, 2.1], "facing": "E", "room": "욕실" },
+  { "kind": "shoeRack", "position": [2.63, 0.55], "facing": "W", "size": [0.65, 0.3], "room": "현관" },
+  { "kind": "kitchenCounter", "position": [2.99, 1.46], "facing": "W", "size": [1.08, 0.54, 0.85], "room": "거실" },
+  { "kind": "cooktop", "position": [2.96, 1.17], "facing": "W", "room": "거실" },
+  { "kind": "kitchenSink", "position": [2.96, 1.69], "facing": "W", "room": "거실" }
+ ],
+ "glbUrl": null
+}

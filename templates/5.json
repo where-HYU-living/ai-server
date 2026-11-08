@@ -1,0 +1,86 @@
+{
+ "id": 5,
+ "name": "청량리역 35B타입",
+ "areaM2": 20.0,
+ "ceilingHeight": 2.4,
+ "walls": [
+  { "from": [0, 0], "to": [5.03, 0], "thickness": 0.2 },
+  { "from": [5.03, 0], "to": [5.03, 8.12], "thickness": 0.2 },
+  { "from": [5.03, 8.12], "to": [0, 8.12], "thickness": 0.2 },
+  { "from": [0, 8.12], "to": [0, 0], "thickness": 0.2 },
+  { "from": [0, 6.62], "to": [1.5, 6.62], "thickness": 0.2 },
+  { "from": [1.5, 6.62], "to": [1.5, 8.12], "thickness": 0.2 },
+  { "from": [0, 0.7], "to": [1.5, 0.7], "thickness": 0.1 },
+  { "from": [1.5, 0], "to": [1.5, 2.79], "thickness": 0.1 },
+  { "from": [1.5, 0.54], "to": [2.71, 0.54], "thickness": 0.1 },
+  { "from": [2.71, 0], "to": [2.71, 1.3], "thickness": 0.1 },
+  { "from": [2.71, 1.3], "to": [3.07, 1.3], "thickness": 0.1 },
+  { "from": [3.07, 1.3], "to": [3.07, 2.79], "thickness": 0.1 },
+  { "from": [1.5, 2.79], "to": [3.07, 2.79], "thickness": 0.1 },
+  { "from": [4.41, 0], "to": [4.41, 0.6], "thickness": 0.1 },
+  { "from": [4.41, 0.6], "to": [5.03, 0.6], "thickness": 0.1 }
+ ],
+ "openings": [
+  { "type": "door", "wall": 0, "offset": 3.35, "width": 0.95, "height": 2.1, "sill": 0, "style": "swing", "swing": { "hinge": "start", "opensTo": 1 } },
+  { "type": "door", "wall": 11, "offset": 0.23, "width": 0.7, "height": 2.0, "sill": 0, "style": "swing", "swing": { "hinge": "start", "opensTo": -1 } },
+  { "type": "door", "wall": 6, "offset": 0.45, "width": 0.65, "height": 2.0, "sill": 0, "style": "swing", "swing": { "hinge": "start", "opensTo": -1 } },
+  { "type": "window", "wall": 3, "offset": 4.92, "width": 0.82, "height": 1.3, "sill": 0.9 },
+  { "type": "window", "wall": 3, "offset": 2.28, "width": 1.74, "height": 1.3, "sill": 0.9 },
+  { "type": "window", "wall": 2, "offset": 0.89, "width": 1.73, "height": 2.0, "sill": 0.1, "style": "sliding" }
+ ],
+ "rooms": [
+  {
+   "name": "보일러실",
+   "kind": "utility",
+   "polygon": [[0, 0], [1.5, 0], [1.5, 0.7], [0, 0.7]],
+   "floor": { "material": "concrete", "color": "#D8D8D8", "height": -0.05 }
+  },
+  {
+   "name": "PS",
+   "kind": "other",
+   "polygon": [[1.5, 0], [2.71, 0], [2.71, 0.54], [1.5, 0.54]],
+   "floor": { "material": "concrete", "color": "#6E6E6E", "height": 0 }
+  },
+  {
+   "name": "현관",
+   "kind": "entrance",
+   "polygon": [[2.71, 0], [4.41, 0], [4.41, 0.6], [5.03, 0.6], [5.03, 1.3], [2.71, 1.3]],
+   "floor": { "material": "tile", "color": "#DFDEDA", "height": -0.08 }
+  },
+  {
+   "name": "PS2",
+   "kind": "other",
+   "polygon": [[4.41, 0], [5.03, 0], [5.03, 0.6], [4.41, 0.6]],
+   "floor": { "material": "concrete", "color": "#6E6E6E", "height": 0 }
+  },
+  {
+   "name": "욕실",
+   "kind": "bathroom",
+   "polygon": [[1.5, 0.54], [2.71, 0.54], [2.71, 1.3], [3.07, 1.3], [3.07, 2.79], [1.5, 2.79]],
+   "floor": { "material": "tile", "color": "#C0BEBB", "height": -0.08 }
+  },
+  {
+   "name": "드레스룸",
+   "kind": "storage",
+   "polygon": [[0, 0.7], [1.5, 0.7], [1.5, 2.33], [0, 2.33]],
+   "floor": { "material": "wood", "color": "#C8BCB2", "height": 0 }
+  },
+  {
+   "name": "거실",
+   "kind": "living",
+   "polygon": [[0, 2.33], [1.5, 2.33], [1.5, 2.79], [3.07, 2.79], [3.07, 1.3], [5.03, 1.3], [5.03, 8.12], [1.5, 8.12], [1.5, 6.62], [0, 6.62]],
+   "floor": { "material": "wood", "color": "#C8BCB2", "height": 0 }
+  }
+ ],
+ "entrance": [3.83, 0],
+ "fixtures": [
+  { "kind": "toilet", "position": [1.97, 2.25], "facing": "N", "size": [0.45, 0.65, 0.75], "room": "욕실" },
+  { "kind": "sink", "position": [2.58, 2.37], "facing": "N", "room": "욕실" },
+  { "kind": "shoeRack", "position": [2.98, 0.74], "facing": "E", "size": [1.09, 0.37], "room": "현관" },
+  { "kind": "shoeRack", "position": [4.68, 0.95], "facing": "W", "size": [0.6, 0.5], "room": "현관" },
+  { "kind": "kitchenCounter", "position": [4.67, 2.63], "facing": "W", "size": [2.64, 0.6, 0.85], "room": "거실" },
+  { "kind": "cooktop", "position": [4.67, 1.55], "facing": "W", "room": "거실" },
+  { "kind": "kitchenSink", "position": [4.67, 2.71], "facing": "W", "room": "거실" }
+ ],
+ "glbUrl": null
+}

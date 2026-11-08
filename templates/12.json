@@ -1,0 +1,87 @@
+{
+ "id": 12,
+ "name": "한영스테이 18A타입",
+ "areaM2": 18,
+ "ceilingHeight": 2.4,
+ "walls": [
+  { "from": [0, 0], "to": [3.0, 0], "thickness": 0.2 },
+  { "from": [3.0, 0], "to": [3.0, 6.17], "thickness": 0.2 },
+  { "from": [3.0, 6.17], "to": [0, 6.17], "thickness": 0.2 },
+  { "from": [0, 6.17], "to": [0, 0], "thickness": 0.2 },
+  { "from": [1.61, 0], "to": [1.61, 1.28], "thickness": 0.1 },
+  { "from": [1.61, 1.28], "to": [3.0, 1.28], "thickness": 0.1 },
+  { "from": [1.52, 4.17], "to": [3.0, 4.17], "thickness": 0.1 },
+  { "from": [1.52, 4.17], "to": [1.52, 5.4], "thickness": 0.1 },
+  { "from": [1.52, 5.4], "to": [1.84, 5.4], "thickness": 0.1 },
+  { "from": [1.84, 5.4], "to": [1.84, 6.17], "thickness": 0.1 },
+  { "from": [2.65, 5.4], "to": [3.0, 5.4], "thickness": 0.1 },
+  { "from": [2.65, 5.4], "to": [2.65, 6.17], "thickness": 0.1 },
+  { "from": [0, 4.27], "to": [0.52, 4.27], "thickness": 0.1 },
+  { "from": [0, 4.98], "to": [0.52, 4.98], "thickness": 0.1 },
+  { "from": [0.52, 4.27], "to": [0.52, 6.17], "thickness": 0.1 }
+ ],
+ "openings": [
+  { "type": "door", "wall": 2, "offset": 1.5, "width": 0.9, "height": 2.1, "sill": 0, "style": "swing", "swing": { "hinge": "end", "opensTo": 1 } },
+  { "type": "door", "wall": 7, "offset": 0.38, "width": 0.7, "height": 2.0, "sill": 0, "style": "swing", "swing": { "hinge": "end", "opensTo": 1 } },
+  { "type": "door", "wall": 4, "offset": 0.47, "width": 0.7, "height": 2.0, "sill": 0, "style": "swing", "swing": { "hinge": "start", "opensTo": 1 } },
+  { "type": "window", "wall": 0, "offset": 0.1, "width": 1.35, "height": 1.4, "sill": 0.9, "style": "sliding" },
+  { "type": "window", "wall": 0, "offset": 2.03, "width": 0.72, "height": 1.2, "sill": 0.9, "style": "sliding" }
+ ],
+ "rooms": [
+  {
+   "name": "실외기실",
+   "kind": "utility",
+   "polygon": [[1.61, 0], [3.0, 0], [3.0, 1.28], [1.61, 1.28]],
+   "floor": { "material": "concrete", "color": "#D8D4CC", "height": -0.05 }
+  },
+  {
+   "name": "거실",
+   "kind": "living",
+   "polygon": [[0, 0], [1.61, 0], [1.61, 1.28], [3.0, 1.28], [3.0, 4.17], [1.52, 4.17], [1.52, 5.63], [0.52, 5.63], [0.52, 4.27], [0, 4.27]],
+   "floor": { "material": "wood", "color": "#9C6B4E", "height": 0 }
+  },
+  {
+   "name": "현관",
+   "kind": "entrance",
+   "polygon": [[0.52, 5.63], [1.52, 5.63], [1.52, 5.4], [1.84, 5.4], [1.84, 6.17], [0.52, 6.17]],
+   "floor": { "material": "tile", "color": "#C9C4BA", "height": -0.08 }
+  },
+  {
+   "name": "욕실",
+   "kind": "bathroom",
+   "polygon": [[1.52, 4.17], [3.0, 4.17], [3.0, 5.4], [2.65, 5.4], [2.65, 6.17], [1.84, 6.17], [1.84, 5.4], [1.52, 5.4]],
+   "floor": { "material": "tile", "color": "#8F8F8C", "height": -0.08 }
+  },
+  {
+   "name": "PS",
+   "kind": "other",
+   "polygon": [[2.65, 5.4], [3.0, 5.4], [3.0, 6.17], [2.65, 6.17]],
+   "floor": { "material": "concrete", "color": "#BDBDBD", "height": 0 }
+  },
+  {
+   "name": "수납장1",
+   "kind": "storage",
+   "polygon": [[0, 4.27], [0.52, 4.27], [0.52, 4.98], [0, 4.98]],
+   "floor": { "material": "vinyl", "color": "#E6E3DD", "height": 0 }
+  },
+  {
+   "name": "수납장2",
+   "kind": "storage",
+   "polygon": [[0, 4.98], [0.52, 4.98], [0.52, 6.17], [0, 6.17]],
+   "floor": { "material": "vinyl", "color": "#E6E3DD", "height": 0 }
+  }
+ ],
+ "entrance": [1.05, 6.17],
+ "fixtures": [
+  { "kind": "bed", "position": [2.0, 2.05], "facing": "W", "size": [1.1, 2.0, 0.45], "room": "거실" },
+  { "kind": "wardrobe", "position": [2.25, 3.88], "facing": "N", "size": [1.45, 0.48], "room": "거실" },
+  { "kind": "kitchenCounter", "position": [0.3, 3.49], "facing": "E", "size": [1.55, 0.6, 0.85], "room": "거실" },
+  { "kind": "kitchenSink", "position": [0.3, 3.42], "facing": "E", "room": "거실" },
+  { "kind": "upperCabinet", "position": [0.18, 3.49], "facing": "E", "size": [1.55, 0.35], "room": "거실" },
+  { "kind": "sink", "position": [1.92, 4.42], "facing": "S", "room": "욕실" },
+  { "kind": "toilet", "position": [2.67, 4.62], "facing": "W", "room": "욕실" },
+  { "kind": "shower", "position": [2.25, 5.85], "facing": "W", "room": "욕실" },
+  { "kind": "shoeRack", "position": [1.68, 5.79], "facing": "W", "size": [0.77, 0.32], "room": "현관" }
+ ],
+ "glbUrl": null
+}
