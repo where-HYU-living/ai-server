@@ -60,3 +60,45 @@ def test_swing_side_sign():
 def test_model_loads():
     from app.adapters.segmentation import CubiCasaSegmenter
     assert CubiCasaSegmenter().segment(np.full((128, 128, 3), 255, np.uint8)).rooms.shape
+
+
+def _deals(n=400, seed=0):
+    from app.rent.features import Deal
+    rng = np.random.default_rng(seed)
+    dongs = {"사근동": 48_000, "행당동": 40_000, "마장동": 36_000}
+    out = []
+    for i in range(n):
+        dong = list(dongs)[i % 3]
+        area = float(rng.uniform(10, 35))
+        per_m2 = dongs[dong] * rng.uniform(0.85, 1.15)
+        deposit = int(rng.choice([5_000_000, 10_000_000, 30_000_000]))
+        rent = max(0, int(per_m2 * area - deposit * 0.046 / 12))
+        out.append(Deal(dong=dong, area_m2=area, contract_ym=202501 + (i % 12), deposit=deposit, rent=rent,
+                        floor=int(rng.integers(1, 6)), built_year=int(rng.integers(1990, 2020)),
+                        building_type="ROWHOUSE", contract_type="신규"))
+    return out
+
+
+def test_rent_model_quantiles_ordered_and_plausible(tmp_path):
+    from app.rent.features import Deal
+    from app.rent.model import RentModel, fit
+    model = RentModel(fit(_deals(), {"사근동": {"campus_m": 400, "subway_m": 700, "bus_500m": 12}}))
+    path = tmp_path / "model.joblib"
+    model.save(path)
+    r = RentModel.load(path).estimate(Deal(dong="사근동", area_m2=20, contract_ym=202512))
+    assert r.low <= r.fair_rent <= r.high
+    assert 700_000 < r.fair_rent < 1_250_000   # 48,000원/㎡ × 20㎡ 근처
+
+
+def test_rent_unknown_dong_still_predicts():
+    from app.rent.features import Deal
+    from app.rent.model import RentModel, fit
+    r = RentModel(fit(_deals(), {})).estimate(Deal(dong="없는동", area_m2=15, contract_ym=202512))
+    assert r.fair_rent > 0
+
+
+def test_rent_endpoint_off_returns_503():
+    from fastapi.testclient import TestClient
+    from app.main import app
+    res = TestClient(app).post("/v1/rent/estimate", json={"dong": "사근동", "areaM2": 20, "contractYm": 202610})
+    assert res.status_code == 503
