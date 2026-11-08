@@ -7,4 +7,4 @@ COPY app ./app
 COPY templates ./templates
 COPY scripts ./scripts
 ENV PORT=8000
-CMD ["sh", "-c", "uvicorn app.main:app --host :: --port ${PORT}"]
+CMD ["sh", "-c", "uvicorn app.main:app --host 0.0.0.0 --port ${PORT}"]
