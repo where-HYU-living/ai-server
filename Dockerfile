@@ -7,5 +7,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY app ./app
 COPY templates ./templates
 COPY scripts ./scripts
+# 모델 파일은 Railway 변수 FETCH_MODELS=true 일 때만 이미지에 넣는다 (Hugging Face combe4259/chatatda-models)
+ARG FETCH_MODELS=false
+RUN if [ "$FETCH_MODELS" = "true" ]; then sh scripts/fetch_models.sh; fi
 ENV PORT=8000
 CMD ["sh", "-c", "uvicorn app.main:app --host 0.0.0.0 --port ${PORT}"]

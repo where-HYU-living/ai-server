@@ -26,7 +26,7 @@
 ## 실행
 ```bash
 python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
-sh scripts/fetch_models.sh            # CubiCasa5K 코드+가중치(209MB)
+sh scripts/fetch_models.sh            # CubiCasa5K 코드(GitHub) + 가중치(209MB, Hugging Face)
 .venv/bin/uvicorn app.main:app --port 8000
 .venv/bin/python -m pytest -q tests
 .venv/bin/python scripts/evaluate.py  # 27장 vs 정답 JSON (숫자 비교)
@@ -35,6 +35,10 @@ sh scripts/fetch_models.sh            # CubiCasa5K 코드+가중치(209MB)
 ```
 ## 배포 (Railway)
 `Dockerfile` + `railway.json`.
+모델 파일은 [Hugging Face `combe4259/chatatda-models`](https://huggingface.co/combe4259/chatatda-models)에 두고,
+Railway 변수 `FETCH_MODELS=true` 일 때만 빌드 중에 받는다 (기본 `false` — 받지 않음).
+추론을 쓰려면 `FETCH_MODELS=true` 와 `INFERENCE=on` 을 함께 켠다.
+적정 월세 모델을 새로 학습했으면 `hf upload combe4259/chatatda-models weights/rent/model.joblib rent/model.joblib`.
 백엔드에는 환경변수 `AI_SERVER_URL=https://<서비스 주소>` 를 둔다.
 
 ## 라이선스 주의
